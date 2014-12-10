@@ -1,4 +1,4 @@
-namespace java by.mmf.yellowpress
+namespace java by.mmf.yellowpress.thrift
 
 struct NewsItem{
  1: string newsId,
@@ -41,6 +41,6 @@ exception YellowPressException {
 }
 
 service YellowPressService {
-	void subscribe(1:string usedId, 2:string tag) throws (1:YellowPressException exp),
+	void subscribe(1:string userId, 2:string tag) throws (1:YellowPressException exp),
     list<NewsItemByUser> getNewsByUser(1:string userId) throws (1:YellowPressException exp)
 }
