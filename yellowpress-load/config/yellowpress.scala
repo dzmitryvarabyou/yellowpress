@@ -8,7 +8,7 @@ new ParrotLauncherConfig {
   // traceLevel = com.twitter.logging.Level.TRACE
 
   // log = "your_input_file_here.log"
-  log = "config/yellowpress.scala"
+  log = "config/yellowpress.log"
   requestRate = 1
   duration = 15
   timeUnit = "MINUTES"

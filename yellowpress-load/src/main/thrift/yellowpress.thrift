@@ -41,6 +41,18 @@ exception YellowPressExceptionT {
 }
 
 service YellowPressServiceT {
+
 	void subscribe(1:string userId, 2:string tag) throws (1:YellowPressExceptionT exp),
-    list<NewsItemByUserT> getNewsByUser(1:string userId) throws (1:YellowPressExceptionT exp)
+
+    list<NewsItemByUserT> getNewsByUser(1:string userId) throws (1:YellowPressExceptionT exp),
+
+    list<string> getAllSubscribedTags(1:string userId) throws (1:YellowPressExceptionT exp),
+
+    void removeSubscription(1:string userId, 2:string tag) throws (1:YellowPressExceptionT exp),
+
+    list<NewsItemT> getAllNewsPreviews() throws (1:YellowPressExceptionT exp),
+
+    list<NewsItemT> getNewsPreviewsByFacultyAndTags(1:string faculty, 2:list<string> tags) throws (1:YellowPressExceptionT exp),
+
+    NewsItemT getNewsItem(1:string newsItemId) throws (1:YellowPressExceptionT exp)
 }

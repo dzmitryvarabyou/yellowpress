@@ -2,10 +2,7 @@ package by.mmf.yellowpress.load.thrift.impl;
 
 import by.mmf.yellowpress.domain.NewsItemByUser;
 import by.mmf.yellowpress.service.YellowPressService;
-import by.mmf.yellowpress.thrift.NewsItemByUserT;
-import by.mmf.yellowpress.thrift.YellowPressErrorCodeT;
-import by.mmf.yellowpress.thrift.YellowPressExceptionT;
-import by.mmf.yellowpress.thrift.YellowPressServiceT;
+import by.mmf.yellowpress.thrift.*;
 import by.mmf.yellowpress.utils.MappingUtil;
 import org.apache.thrift.TException;
 
@@ -43,6 +40,31 @@ public class YellowPressServiceImpl implements YellowPressServiceT.Iface {
             thriftResult.add(thriftItem);
         }
         return thriftResult;
+    }
+
+    @Override
+    public List<String> getAllSubscribedTags(String userId) throws YellowPressExceptionT, TException {
+        return null;
+    }
+
+    @Override
+    public void removeSubscription(String userId, String tag) throws YellowPressExceptionT, TException {
+
+    }
+
+    @Override
+    public List<NewsItemT> getAllNewsPreviews() throws YellowPressExceptionT, TException {
+        return null;
+    }
+
+    @Override
+    public List<NewsItemT> getNewsPreviewsByFacultyAndTags(String faculty, List<String> tags) throws YellowPressExceptionT, TException {
+        return null;
+    }
+
+    @Override
+    public NewsItemT getNewsItem(String newsItemId) throws YellowPressExceptionT, TException {
+        return null;
     }
 
     public static void copyProperties(NewsItemByUserT dest, NewsItemByUser orig) {
