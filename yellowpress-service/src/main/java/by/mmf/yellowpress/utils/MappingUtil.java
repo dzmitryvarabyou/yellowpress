@@ -3,6 +3,8 @@ package by.mmf.yellowpress.utils;
 import by.mmf.yellowpress.domain.NewsItem;
 import by.mmf.yellowpress.domain.NewsItemByUser;
 import by.mmf.yellowpress.domain.User;
+import by.mmf.yellowpress.thrift.NewsItemByUserT;
+import by.mmf.yellowpress.thrift.NewsItemT;
 import com.netflix.astyanax.model.ColumnList;
 import com.netflix.astyanax.model.Row;
 import com.netflix.astyanax.serializers.ListSerializer;
@@ -86,5 +88,29 @@ public class MappingUtil {
         result.imageUrl = columns.getStringValue("image_url", null);
         result.faculty = columns.getStringValue("faculty", null);
         return result;
+    }
+
+    public static void copyProperties(NewsItemByUserT dest, NewsItemByUser orig) {
+        dest.userId = orig.userId;
+        dest.tag = orig.tag;
+        dest.publishedAt = orig.publishedAt.toString();
+        dest.newsId = orig.newsId;
+        dest.title = orig.title;
+        dest.description = orig.description;
+        dest.imageUrl = orig.imageUrl;
+        dest.faculty = orig.faculty;
+    }
+
+    public static void copyProperties(NewsItemT dest, NewsItem orig) {
+        dest.newsId = orig.newsId;
+        dest.body = orig.body;
+        dest.publishedAt = orig.publishedAt.toString();
+        dest.lastModifiedAt = orig.lastModifiedAt.toString();
+        dest.title = orig.title;
+        dest.description = orig.description;
+        dest.imageUrl = orig.imageUrl;
+        dest.faculty = orig.faculty;
+        dest.tags = orig.tags;
+        dest.faculty = orig.faculty;
     }
 }

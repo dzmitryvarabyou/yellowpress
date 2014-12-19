@@ -10,6 +10,8 @@ import by.mmf.yellowpress.service.impl.YellowPressServiceImpl;
 import com.netflix.astyanax.connectionpool.exceptions.ConnectionException;
 import junit.framework.Assert;
 import org.junit.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +21,7 @@ import java.util.Date;
  */
 public class YellowPressServiceTest {
 
+    protected static final Logger LOG = LoggerFactory.getLogger(YellowPressServiceTest.class);
     private static YellowPressService yellowPressService;
     private static User user;
     private static UserDao userDao;
@@ -85,6 +88,19 @@ public class YellowPressServiceTest {
     public void testSubscribe() throws ConnectionException {
         yellowPressService.subscribe(user.userId, "#tag2");
         Assert.assertEquals(4, newsItemByUserDao.findByUserId(user.userId).size());
+
+    }
+
+    @Test
+    public void testGetAllSubscribedTags() {
+        yellowPressService.subscribe(user.userId, "#tag2");
+        Assert.assertEquals(2, yellowPressService.getAllSubscribedTags(user.userId).size());
+    }
+
+    @Test
+    public void testGetNewsItem() {
+        String newsId = "news_id_1";
+        Assert.assertEquals(newsId, yellowPressService.getNewsItemById(newsId).newsId);
     }
 
     @Test

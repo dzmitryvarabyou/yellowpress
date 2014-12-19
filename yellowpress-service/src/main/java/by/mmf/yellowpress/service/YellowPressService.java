@@ -19,11 +19,11 @@ public interface YellowPressService {
 
     List<NewsItemByUser> getNewsByUserAndTag(String userId, String tag);
 
-    List<NewsItemByUser> getNewsByUserAndFaculty(String userId, String faculty);
+    List<NewsItemByUser> getNewsItemsByUserAndFaculty(String userId, String faculty);
 
-    List<NewsItemByUser> getNewsPreviewsByTag(String tag);
+    List<NewsItemByUser> getNewsItemsByUserByTag(String tag);
 
-    List<NewsItemByUser> getNewsPreviewsByFaculty(String faculty);
+    List<NewsItemByUser> getNewsItemsByUserByFaculty(String faculty);
 
     void addNewsItem(NewsItem newsItem);
 
@@ -33,4 +33,7 @@ public interface YellowPressService {
 
     List<NewsItem> getAllNewsPreviews();
 
+    List<String> getAllSubscribedTags(String userId);
+
+    void removeSubscription(String userId, String tag);
 }

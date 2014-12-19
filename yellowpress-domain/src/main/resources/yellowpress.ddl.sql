@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS news (
   last_modified_at timestamp,
   title varchar,
   body varchar,
+  description varchar,
   faculty varchar,
   image_url varchar,
   tags list<varchar>,
@@ -52,4 +53,5 @@ CREATE TABLE IF NOT EXISTS news_by_user (
   image_url varchar,
   PRIMARY KEY (user_id, tag, published_at, news_id));
 
+CREATE INDEX IF NOT EXISTS ON yellowpress.news_by_user (faculty);
 CREATE INDEX IF NOT EXISTS ON yellowpress.news_by_user (faculty);

@@ -20,6 +20,7 @@ import java.util.Map;
  */
 public class YellowPressServiceImpl implements YellowPressService {
 
+    public final static String NEWS_PREVIEWS_CACHE_KEY = "news_previews";
     private static final Logger LOG = LoggerFactory.getLogger(YellowPressServiceImpl.class);
     private UserDao userDao;
     private NewsItemDao newsItemDao;
@@ -40,9 +41,20 @@ public class YellowPressServiceImpl implements YellowPressService {
     @Override
     public void subscribe(String userId, String tag) {
         try {
+            memcachedClient.delete(userId);
             List<NewsItem> newsItems = newsItemDao.findByTag(tag);
             newsItemByUserDao.addAll(userId, newsItems, tag);
             userDao.addSubscribedTag(userId, tag);
+        } catch (ConnectionException e) {
+            LOG.error(e.getMessage());
+        }
+    }
+
+    @Override
+    public void removeSubscription(String userId, String tag) {
+        try {
+            memcachedClient.delete(userId);
+            userDao.removeSubscription(userId, tag);
         } catch (ConnectionException e) {
             LOG.error(e.getMessage());
         }
@@ -57,6 +69,7 @@ public class YellowPressServiceImpl implements YellowPressService {
             for (String userId : userIdsTags.keySet()) {
                 memcachedClient.delete(userId);
             }
+            memcachedClient.delete(NEWS_PREVIEWS_CACHE_KEY);
         } catch (ConnectionException e) {
             LOG.error(e.getMessage());
         }
@@ -77,6 +90,34 @@ public class YellowPressServiceImpl implements YellowPressService {
     }
 
     @Override
+    public NewsItem getNewsItemById(String newsId) {
+        NewsItem result = (NewsItem) memcachedClient.get(newsId);
+        try {
+            if (result == null) {
+                result = newsItemDao.findById(newsId);
+                memcachedClient.set(newsId, 0, result);
+            }
+        } catch (ConnectionException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
+    public List<NewsItem> getAllNewsPreviews() {
+        List<NewsItem> result = (List<NewsItem>) memcachedClient.get(NEWS_PREVIEWS_CACHE_KEY);
+        try {
+            if (result == null) {
+                result = newsItemDao.findAllWithoutBody();
+                memcachedClient.set(NEWS_PREVIEWS_CACHE_KEY, 0, result);
+            }
+        } catch (ConnectionException e) {
+            LOG.error(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
     public List<NewsItemByUser> getNewsByUserAndTag(String userId, String tag) {
         //TODO: cacheable
         List<NewsItemByUser> result = null;
@@ -89,7 +130,7 @@ public class YellowPressServiceImpl implements YellowPressService {
     }
 
     @Override
-    public List<NewsItemByUser> getNewsByUserAndFaculty(String userId, String faculty) {
+    public List<NewsItemByUser> getNewsItemsByUserAndFaculty(String userId, String faculty) {
         //TODO: cacheable
         List<NewsItemByUser> result = null;
         try {
@@ -101,7 +142,7 @@ public class YellowPressServiceImpl implements YellowPressService {
     }
 
     @Override
-    public List<NewsItemByUser> getNewsPreviewsByTag(String tag) {
+    public List<NewsItemByUser> getNewsItemsByUserByTag(String tag) {
         //TODO: cacheable
         List<NewsItemByUser> result = null;
         try {
@@ -113,24 +154,13 @@ public class YellowPressServiceImpl implements YellowPressService {
     }
 
     @Override
-    public List<NewsItemByUser> getNewsPreviewsByFaculty(String faculty) {
+    public List<NewsItemByUser> getNewsItemsByUserByFaculty(String faculty) {
         //TODO: cacheable
         List<NewsItemByUser> result = null;
         try {
             result = newsItemByUserDao.findByFaculty(faculty);
         } catch (ConnectionException e) {
             LOG.error(e.getMessage());
-        }
-        return result;
-    }
-
-    @Override
-    public NewsItem getNewsItemById(String newsId) {
-        NewsItem result = null;
-        try {
-            result = newsItemDao.findById(newsId);
-        } catch (ConnectionException e) {
-            e.printStackTrace();
         }
         return result;
     }
@@ -147,11 +177,10 @@ public class YellowPressServiceImpl implements YellowPressService {
     }
 
     @Override
-    public List<NewsItem> getAllNewsPreviews() {
-        List<NewsItem> result = null;
+    public List<String> getAllSubscribedTags(String userId) {
+        List<String> result = null;
         try {
-            //TODO: add query to fetch news items without body
-            result = newsItemDao.findAll();
+            result = userDao.getAllSubscribedTags(userId);
         } catch (ConnectionException e) {
             LOG.error(e.getMessage());
         }

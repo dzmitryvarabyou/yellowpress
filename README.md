@@ -1,5 +1,18 @@
 yellowpress
 ===========
+
+Used:
+1) Cassandra version 2.1
+2) Thrift compiler version 0.9.1
+3) Twitter IAGO 6.2.4
+4) scala 2.9.2
+
+mvn package -DskipTests
+mkdir tmp; cd tmp
+unzip ../target/yellowpress-load-package-dist.zip
+java -jar yellowpress-load-1.0-SNAPSHOT.jar -f ../config/yellowpress.scala
+java -jar yellowpress-load-1.0-SNAPSHOT.jar -f ../config/yellowpress.scala -k
+
 1. Add Storm to real data analyzing like:
  a) time : userId : newsId -- to support analytics for trends news during getting news by id
  b) time : userId : tag -- trends for tags (статистика посещения новостей по тегам)

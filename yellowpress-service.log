@@ -1,0 +1,47 @@
+INFO  com.netflix.astyanax.connectionpool.impl.ConnectionPoolMBeanManager: Registering mbean: com.netflix.MonitoredResources:type=ASTYANAX,name=YellowPressConnectionPool,ServiceType=connectionpool
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.ConnectionPoolMBeanManager: Registering mbean: com.netflix.MonitoredResources:type=ASTYANAX,name=YellowPressConnectionPool,ServiceType=connectionpool
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  by.mmf.yellowpress.service.impl.YellowPressServiceImpl: <<: Subscribe : jack on #tag1
+INFO  by.mmf.yellowpress.service.impl.YellowPressServiceImpl: <<: Subscribe : jack on #tag2
+INFO  by.mmf.yellowpress.service.impl.YellowPressServiceImpl: <<: Subscribe : jack on #tag1
+INFO  by.mmf.yellowpress.service.impl.YellowPressServiceImpl: <<: Subscribe : jack on #tag1
+INFO  com.netflix.astyanax.connectionpool.impl.ConnectionPoolMBeanManager: Registering mbean: com.netflix.MonitoredResources:type=ASTYANAX,name=YellowPressConnectionPool,ServiceType=connectionpool
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  by.mmf.yellowpress.service.impl.YellowPressServiceImpl: <<: Subscribe : jack on #tag1
+INFO  by.mmf.yellowpress.service.impl.YellowPressServiceImpl: <<: Subscribe : jack on #tag2
+INFO  by.mmf.yellowpress.service.impl.YellowPressServiceImpl: <<: Subscribe : jack on #tag1
+INFO  by.mmf.yellowpress.service.impl.YellowPressServiceImpl: <<: Subscribe : jack on #tag1
+ERROR com.netflix.astyanax.connectionpool.impl.ConnectionPoolMBeanManager: com.netflix.MonitoredResources:type=ASTYANAX,name=YellowPressConnectionPool,ServiceType=connectionpool
+ERROR com.netflix.astyanax.connectionpool.impl.ConnectionPoolMBeanManager: com.netflix.MonitoredResources:type=ASTYANAX,name=YellowPressConnectionPool,ServiceType=connectionpool
+INFO  com.netflix.astyanax.connectionpool.impl.ConnectionPoolMBeanManager: Registering mbean: com.netflix.MonitoredResources:type=ASTYANAX,name=YellowPressConnectionPool,ServiceType=connectionpool
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  com.netflix.astyanax.connectionpool.impl.CountingConnectionPoolMonitor: AddHost: localhost
+INFO  by.mmf.yellowpress.service.impl.YellowPressServiceImpl: <<: Subscribe : jack on #tag1
+INFO  by.mmf.yellowpress.service.impl.YellowPressServiceImpl: <<: Subscribe : jack on #tag2
+INFO  by.mmf.yellowpress.service.impl.YellowPressServiceImpl: <<: Subscribe : jack on #tag1
+INFO  by.mmf.yellowpress.service.impl.YellowPressServiceImpl: <<: Subscribe : jack on #tag2
+INFO  by.mmf.yellowpress.service.impl.YellowPressServiceImpl: <<: Subscribe : jack on #tag1
+INFO  by.mmf.yellowpress.service.impl.YellowPressServiceImpl: <<: Subscribe : jack on #tag1
+INFO  by.mmf.yellowpress.service.impl.YellowPressServiceImpl: <<: Subscribe : jack on #tag1
+ERROR com.netflix.astyanax.connectionpool.impl.ConnectionPoolMBeanManager: com.netflix.MonitoredResources:type=ASTYANAX,name=YellowPressConnectionPool,ServiceType=connectionpool
+ERROR com.netflix.astyanax.connectionpool.impl.ConnectionPoolMBeanManager: com.netflix.MonitoredResources:type=ASTYANAX,name=YellowPressConnectionPool,ServiceType=connectionpool

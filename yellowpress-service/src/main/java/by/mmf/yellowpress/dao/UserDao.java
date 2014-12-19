@@ -24,7 +24,9 @@ public class UserDao extends GenericDao {
             new MessageFormat("INSERT INTO " + CF_NAME + " (user_id, user_email, user_pass, subscribed_tags, subscribed_faculties) values(''{0}'', ''{1}'', ''{2}'', {3}, {4});");
     public static final MessageFormat FIND_BY_ID_QUERY = new MessageFormat("select * from " + CF_NAME + " where user_id = ''{0}'' limit 1;");
     public static final MessageFormat FIND_IDS_AND_SUBSCRIBED_TAGS_BY_TAG = new MessageFormat("select user_id, subscribed_tags from " + CF_NAME + " where subscribed_tags contains {0};");
+    public static final MessageFormat FIND_SUBSCRIBED_TAGS_BY_USER_ID = new MessageFormat("select subscribed_tags from " + CF_NAME + " where user_id = ''{0}'';");
     public static final MessageFormat DELETE_BY_ID_QUERY = new MessageFormat("delete from " + CF_NAME + " where user_id = ''{0}'';");
+    public static final MessageFormat DELETE_SUBSCRIBED_TAG_QUERY = new MessageFormat("update " + CF_NAME + " set subscribed_tags = subscribed_tags - [''{1}''] where user_id = ''{0}'';");
     public static final MessageFormat ADD_SUBSCRIBED_TAG_QUERY = new MessageFormat("update " + CF_NAME + " set subscribed_tags = subscribed_tags + [''{1}''] where user_id = ''{0}'';");
     public static final MessageFormat ADD_SUBSCRIBED_FACULTY_QUERY = new MessageFormat("update " + CF_NAME + " set subscribed_faculties = subscribed_faculties + [''{1}''] where user_id = ''{0}'';");
 
@@ -105,5 +107,18 @@ public class UserDao extends GenericDao {
     @Override
     public String getColumnFamilyName() {
         return CF_NAME;
+    }
+
+    public List<String> getAllSubscribedTags(String userId) throws ConnectionException {
+        Rows<String, String> rows = keyspace.prepareQuery(columnFamily)
+                .withCql(FIND_SUBSCRIBED_TAGS_BY_USER_ID.format(new Object[]{userId})).execute().getResult().getRows();
+        Row<String, String> row = rows.getRowByIndex(0);
+        List<String> subscribedTags = row.getColumns().getValue("subscribed_tags", MappingUtil.LIST_SERIALIZER, null);
+        return subscribedTags;
+    }
+
+    public void removeSubscription(String userId, String tag) throws ConnectionException {
+        keyspace.prepareQuery(columnFamily).withCql(DELETE_SUBSCRIBED_TAG_QUERY.format(new Object[]{userId, tag}))
+                .execute();
     }
 }

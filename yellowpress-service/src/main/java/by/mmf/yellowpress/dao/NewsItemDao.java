@@ -25,7 +25,8 @@ public class NewsItemDao extends GenericDao {
     public static final MessageFormat INSERT_QUERY = new MessageFormat("INSERT INTO " + CF_NAME + " (news_id, published_at, last_modified_at, title, body, faculty, image_url, tags)" +
             " values(''{0}'', ''{1}'', ''{2}'', ''{3}'', ''{4}'', ''{5}'', ''{6}'', {7});");
     public static final MessageFormat FIND_BY_ID_QUERY = new MessageFormat("select * from " + CF_NAME + " where news_id = ''{0}'' limit 1;");
-    public static final String FIND_ALL_QUERY = "select * from " + CF_NAME + ";";
+    public static final String FIND_ALL_QUERY = "select news_id, published_at, last_modified_at, faculty, title, description, image_url, tags from " + CF_NAME + ";";
+    public static final String FIND_ALL_WITHOUT_BODY_QUERY = "select * from " + CF_NAME + ";";
     public static final MessageFormat FIND_BY_TAG_QUERY = new MessageFormat("select * from " + CF_NAME + " where tags CONTAINS {0};");
     public static final MessageFormat FIND_BY_FACULTY_QUERY = new MessageFormat("select * from " + CF_NAME + " where faculty = ''{0}'';");
     public static final MessageFormat DELETE_BY_ID_QUERY = new MessageFormat("delete from " + CF_NAME + " where news_id = ''{0}'';");
@@ -70,6 +71,23 @@ public class NewsItemDao extends GenericDao {
         List<NewsItem> result = new ArrayList<NewsItem>();
         Rows<String, String> rows = keyspace.prepareQuery(columnFamily)
                 .withCql(FIND_ALL_QUERY).execute().getResult().getRows();
+        for (Row<String, String> row : rows) {
+            result.add(MappingUtil.mapNews(row));
+        }
+        return result;
+    }
+
+    /**
+     * Finds all available {@link by.mmf.yellowpress.domain.NewsItem} news items,
+     * but not containing body te decrease news item size.
+     *
+     * @return
+     * @throws ConnectionException
+     */
+    public List<NewsItem> findAllWithoutBody() throws ConnectionException {
+        List<NewsItem> result = new ArrayList<NewsItem>();
+        Rows<String, String> rows = keyspace.prepareQuery(columnFamily)
+                .withCql(FIND_ALL_WITHOUT_BODY_QUERY).execute().getResult().getRows();
         for (Row<String, String> row : rows) {
             result.add(MappingUtil.mapNews(row));
         }
